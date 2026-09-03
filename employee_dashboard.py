@@ -13,7 +13,7 @@ st.set_page_config(
 @st.cache_data
 def load_dataset():
     try:
-        df = pd.read_csv("employee_cleaned_dataset.csv")
+        df = pd.read_csv("Employee_cleaned_dataset.csv")
         return df
     except FileNotFoundError as e:
         st.warning(f"An error occured: {e}")
@@ -48,7 +48,7 @@ def filter_data(df, department, location, remote):
     if remote != "All":
         filtered_df = filtered_df[filtered_df["Remote"] == remote]
 
-        return filtered_df
+    return filtered_df
 
 
 def display_metrics(filtered_df):
@@ -88,7 +88,7 @@ def display_chart(filtered_df):
         st.plotly_chart(fig1, width="stretch")
 
     with col2:
-        st.subheadere("Average Salary by Department")
+        st.subheader("Average Salary by Department")
         avg_salary = filtered_df.groupby("Department")["Salary"].mean().sort_values(ascending=False)
         fig2 = px.bar(
             x=avg_salary.values,
@@ -107,17 +107,17 @@ def display_chart(filtered_df):
         fig3 = px.histogram(
             filtered_df,
             x="Performance",
-            nbinis=6
+            nbins=6
         )
         fig3.update_traces(
             marker_line_color="white",
-            marker_line_width="1"
+            marker_line_width=1
         )
         fig3.update_layout(
             xaxis_title="Performance",
             yaxis_title="Count"
         )
-        st.plotyly_chart(fig3, width="stretch")
+        st.plotly_chart(fig3, width="stretch")
 
     with col4:
         st.subheader("Employee by Office Location")
